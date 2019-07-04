@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="header::header(ztree2)">
+<title></title>
+<meta name="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<!-- 树 -->
+	<div class="box">
+		<ul id="tree" class="ztree" style="width: 260px;overflow: auto;"></ul>
+	</div>
+
+</body>
+<script type="text/javascript">
+	var zTree;
+	var setting = {
+		//异步加载
+		async : {
+			//是否开启
+			enable : true,
+			//数据类型
+			dataType : "json",
+			//请求地址
+			url : "/city/treeList",
+			autoParam : [ "id" ]
+		},
+		check : {
+			enable : true
+		},
+		callback : {
+			//选中时触发
+			onCheck : onCheck
+		}
+	};
+	//获取数据
+	$(document).ready(function() {
+		$.fn.zTree.init($("#tree"), setting, null);
+	});
+	function onCheck(e, treeId, treeNode) {
+		//获得树对象
+		var treeObj = $.fn.zTree.getZTreeObj("tree");
+		//获得被选中的节点
+		nodes = treeObj.getCheckedNodes(true);
+		//用于存放节点id
+		var l = "";
+		//遍历节点
+		for (var i = 0; i < nodes.length; i++) {
+			//拼接节点id用,分割
+			l = nodes[i].id + "," + l
+		}
+		//输出在控制台
+			console.log(l); 
+	}
+</script>
+</html>

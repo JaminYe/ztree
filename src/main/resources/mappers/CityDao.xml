@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- User: Jamin Date: 2019年5月25日下午1:17:16 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xbsoft.ztree.dao.CityDao">
+	<!-- 字段 -->
+	<sql id="cityColumns">
+		a.id as "id",
+		a.pid as "pid",
+		a.name as "name"
+	</sql>
+	<!-- 查询所有 -->
+	<select id="findList" resultType="com.xbsoft.ztree.entity.City">
+		select
+		<include refid="cityColumns" />
+		from city a where pid=#{id}
+	</select>
+	<!-- 查询子节点个数 -->
+	<select id="childCount" resultType="int">
+		SELECT
+		IFNULL(COUNT( 1 ),0)
+		FROM
+		city
+		WHERE
+		pid =#{id}
+	</select>
+</mapper>

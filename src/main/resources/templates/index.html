@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>demo</title>
+<meta name="content-type" content="text/html; charset=UTF-8">
+<!-- ztree的css 必备 -->
+<link rel="stylesheet" th:href="@{/css/zTreeStyle.css}">
+<!-- ztree提供的demo的css 可有可无 -->
+<link rel="stylesheet" th:href="@{/css/demo.css}">
+<!-- jq 必备放在ztree的js前-->
+<script type="text/javascript" th:src=@{/js/jquery-3.4.1.min.js}></script>
+<!-- ztree的js 必备 -->
+<script type="text/javascript" th:src=@{/js/jquery.ztree.core.min.js}></script>
+</head>
+<body>
+	<script type="text/javascript">
+		//配置
+		var setting = {
+		};
+		//节点
+		var zNodes = [
+			{
+				name : "水果",
+				open : false,
+				isParent : true,
+				children : [
+					{
+						name : "苹果",
+						open : false,
+						children : [ {
+							name : "红富士",
+							open : false
+						} ]
+					}, {
+						name : "梨子",
+						open : false,
+						children : [ {
+							name : "砀山梨",
+							open : false
+						} ]
+					}
+				]
+			} ];
+		//等待document对象加载完填充数据
+		$(document).ready(function() {
+			//init方法(容器,zTree配置,zTree节点数据)
+			 $.fn.zTree.init($("#tree"), setting, zNodes)
+		});
+	</script>
+	<!-- 树 -->
+	<ul id="tree" class="ztree" style="width: 260px;overflow: auto;"></ul>
+</body>
+</html>
